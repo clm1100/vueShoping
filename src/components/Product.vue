@@ -6,18 +6,29 @@
              <span>{{item.price}}</span>
              <span>3000</span>
               <i-button
-              @click="toCart({id:item._id})"
+              @click="toCart(item._id)"
               size='small' 
               type="success">
               加入购物车
               </i-button>
          </li>
      </ul>
+     <hr>
+     <div>
+         <h1 v-show="!cart.length">购物车中没有东西</h1>
+         <ul>
+             <li v-for="item in cart" :key='item._id'>
+                 {{item._id}}
+                 <i>{{item.count}}</i>
+                 </li>
+         </ul>
+     </div>
+
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
     data(){
         return {
@@ -34,8 +45,17 @@ export default {
     methods:{
         toCart(id){
             console.log(id);
+            this.axios.post('/api/product/tocart',{productid:id}).then((data)=>{
+                // console.log(data);
+                if(data.data.code==200){
+                    this.getcart();
+                }
+            })
         },
         ...mapActions(['getcart'])
+    },
+    computed:{
+        ...mapState(['cart'])
     }
 }
 </script>

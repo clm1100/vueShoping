@@ -9,6 +9,9 @@ const store = new vuex.Store({
         cart:[]
     },
     mutations:{
+        getcart(state,data){
+            state.cart = data;
+        },
         tocart(state,obj){
 
         },
@@ -25,7 +28,10 @@ const store = new vuex.Store({
         },
         getcart(context,obj){
             // 获取购物车信息，触发mutations
-            axios.get('')
+            axios.get('/api/users/cart').then((data)=>{
+                console.log(data.data.info);
+                context.commit('getcart',data.data.info)
+            })
         }
     }
 })
