@@ -19,6 +19,16 @@ const store = new vuex.Store({
 
         }
     },
+    getters:{
+        shuliang(state,getters){
+            var sumResult = 0; 
+            for (var i = 0; i < state.cart.length; i++) { 
+            　　sumResult += parseInt(state.cart[i].count); 
+            } 
+            return sumResult; 
+           
+        }
+    },
     actions:{
         tocart(context,obj){
             // 异步添加到购物车,触发mutations同步UI
@@ -29,7 +39,7 @@ const store = new vuex.Store({
         getcart(context,obj){
             // 获取购物车信息，触发mutations
             axios.get('/api/users/cart').then((data)=>{
-                console.log(data.data.info);
+                // console.log(data.data.info);
                 context.commit('getcart',data.data.info)
             })
         }

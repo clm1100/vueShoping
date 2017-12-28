@@ -23,12 +23,13 @@
                  </li>
          </ul>
      </div>
+     <h5>总价：{{shuliang }}</h5>
 
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
 export default {
     data(){
         return {
@@ -55,7 +56,8 @@ export default {
         ...mapActions(['getcart'])
     },
     computed:{
-        ...mapState(['cart'])
+        ...mapState(['cart']),
+        ...mapGetters(['shuliang'])
     }
 }
 </script>
