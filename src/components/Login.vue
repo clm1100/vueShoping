@@ -17,23 +17,30 @@
 </template>
 
 <script>
+import { mapState,mapActions } from "vuex";
 export default {
   data() {
     return {
-      obj:{}
+      obj:{
+        username:'clm11',
+        password:'123456'
+      }
     };
   },
   methods: {
     login() {
-      let url = "/api/login";
+      let url = "/api/login/token";
       console.log(this.obj);
       this.axios
         .post(url, this.obj)
         .then(data => {
           console.log(data);
+          console.log(data.data);
+          this.loginxiugai(data.data);
           this.$router.push('/')
         });
-    }
+    },
+    ...mapActions(['loginxiugai'])
   }
 };
 </script>

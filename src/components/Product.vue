@@ -31,35 +31,37 @@
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
-    data(){
-        return {
-            products:[]
-        }
+  data() {
+    return {
+      products: []
+    };
+  },
+  created() {
+      let access_token = this.$sstore.get("Token")
+    this.axios.get("/api/product/list").then(data => {
+      this.products = data.data.info;
+    });
+    this.getcart(access_token);
+  },
+  methods: {
+    toCart(id) {
+      console.log(id);
+      this.axios
+        .post("/api/product/token/tocart", { productid: id ,access_token:this.$sstore.get("Token")})
+        .then(data => {
+          // console.log(data);
+          if (data.data.code == 200) {
+            this.getcart(this.$sstore.get("Token"));
+          }
+        });
     },
-    created(){
-        this.axios.get('/api/product/list').then((data)=>{
-            // console.log(data.data.info)
-            this.products = data.data.info
-        })
-        this.getcart()
-    },
-    methods:{
-        toCart(id){
-            console.log(id);
-            this.axios.post('/api/product/tocart',{productid:id}).then((data)=>{
-                // console.log(data);
-                if(data.data.code==200){
-                    this.getcart();
-                }
-            })
-        },
-        ...mapActions(['getcart'])
-    },
-    computed:{
-        ...mapState(['cart']),
-        ...mapGetters(['shuliang'])
-    }
-}
+    ...mapActions(["getcart"])
+  },
+  computed: {
+    ...mapState(["cart"]),
+    ...mapGetters(["shuliang"])
+  }
+};
 </script>
 
 <style scoped>

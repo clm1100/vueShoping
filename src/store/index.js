@@ -1,6 +1,7 @@
 import vue from 'vue'
 import vuex from 'vuex'
 import axios from 'axios'
+import loginModel from './model/login'
 vue.use(vuex)
 
 const store = new vuex.Store({
@@ -27,6 +28,9 @@ const store = new vuex.Store({
             } 
             return sumResult; 
            
+        },
+        login(state,getters){
+            return state.loginModel.login
         }
     },
     actions:{
@@ -37,12 +41,20 @@ const store = new vuex.Store({
             // 异步删除购物车数据,触发mutations同步UI
         },
         getcart(context,obj){
+            console.log(obj)
             // 获取购物车信息，触发mutations
-            axios.get('/api/users/cart').then((data)=>{
-                // console.log(data.data.info);
+            axios.get('/api/users/token/cart',{
+                params:{
+                    access_token:obj
+                }
+            }).then((data)=>{
+                console.log(data.data);
                 context.commit('getcart',data.data.info)
             })
         }
+    },
+    modules:{
+        loginModel
     }
 })
 

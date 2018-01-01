@@ -1,10 +1,6 @@
 <template>
   <div>
-      <div>
-          <span>头部组件</span>
-          <span>登陆||注册</span>
-          <span>账号</span>
-      </div>
+      <Header></Header>
       <h1>
           <router-view/>
       </h1>
@@ -13,7 +9,11 @@
 </template>
 
 <script>
+import  Header  from "./Header.vue";
 export default {
+    components:{
+        Header
+    }
 }
 </script>
 
