@@ -31,6 +31,9 @@ const store = new vuex.Store({
         },
         login(state,getters){
             return state.loginModel.login
+        },
+        user(state,getters){
+            return state.loginModel.user
         }
     },
     actions:{

@@ -2,7 +2,8 @@
   <div>
         
         <div v-if="login">
-          <span>{{login}}</span>
+          <Button type="text">Text</Button>
+          <h2>{{user.username}}</h2>
         </div>
         <div v-else>
           <span>登陆||注册</span>
@@ -15,7 +16,7 @@
 import { mapState,mapActions ,mapGetters} from "vuex";
 export default {
       computed:{
-    ...mapGetters(['login'])
+    ...mapGetters(['login','user'])
   },
 
 }

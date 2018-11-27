@@ -1,19 +1,23 @@
 <template>
-   <Row>
-        <i-col span="8">&nbsp;</i-col>
-        <i-col span="8">
-          <form action="" @submit.prevent="login">
-            <i-input v-model="obj.username"  style="width: 300px">
-            </i-input>
-            <i-input v-model="obj.password"  style="width: 300px">
-            </i-input>
-            <div></div>
-          <i-button type="success" htmlType='submit' >确认提交</i-button>
-          </form>
-        </i-col>
-        <i-col span="8">
-        </i-col>
-    </Row>
+ 
+
+
+<div>
+     <form @submit.prevent="login">
+        <mt-field 
+      label="用户名" 
+      placeholder="请输入用户名" 
+      v-model="obj.username" >
+      </mt-field>
+      <mt-field 
+      label="密码" 
+      placeholder="请输入密码" 
+      type="password" 
+      v-model="obj.password">
+      </mt-field>
+      <mt-button size="large" type="primary" >primary</mt-button>
+     </form>
+    </div>
 </template>
 
 <script>

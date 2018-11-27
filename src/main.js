@@ -9,12 +9,14 @@ Vue.prototype.$sstore = Store
 Vue.config.productionTip = false
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import iView from 'iview';
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
 import store from './store';
-import 'iview/dist/styles/iview.css';
 Vue.use(VueCookie);
 Vue.use(VueAxios, axios)
-Vue.use(iView);
+Vue.use(MintUI)
 
 /* eslint-disable no-new */
 new Vue({
